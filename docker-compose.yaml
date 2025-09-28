@@ -1,5 +1,5 @@
-name : postboy
-services : 
+name: postboy
+services:
   db:
     image: postgres:latest
     environment:

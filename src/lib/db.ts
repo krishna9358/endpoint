@@ -1,19 +1,19 @@
 // this is prisma singloeton page. it help for a single instance of prisma everywhere.
 
-import {PrismaClient} from "@prisma/client"
+import { PrismaClient } from "@prisma/client";
 
-declare global{
-    var prisma:PrismaClient | undefined
+declare global {
+  var prisma: PrismaClient | undefined;
 }
 
+const db =
+  globalThis.prisma ||
+  new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
 
-const db = globalThis.prisma || new PrismaClient({
-    log: ['query', 'info', 'warn', 'error'
-    ],
-})
+if (process.env.NODE_ENV === "development") {
+  globalThis.prisma = db;
+}
 
-if (process.env.NODE_ENV === 'development'){
-    globalThis.prisma = db
-}  
-
-export default db
+export default db;

@@ -4,3 +4,4 @@
 - prisma init, and created singleton prisma client
 - created docker compose file
 - created the schema in prisma, migrate and generate client
+- do authentication thing

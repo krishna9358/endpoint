@@ -1,3 +1,5 @@
+// this is prisma singloeton page. it help for a single instance of prisma everywhere.
+
 import {PrismaClient} from "@prisma/client"
 
 declare global{

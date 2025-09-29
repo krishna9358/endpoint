@@ -6,11 +6,8 @@ import { currentUser } from "@/modules/authentication/actions";
 export default async function Home() {
   const user = await currentUser();
   return (
-
-      <>
-      sadf
+    <>
       <UserButton user={user} />
-      </>
-
+    </>
   );
 }

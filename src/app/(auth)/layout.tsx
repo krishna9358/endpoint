@@ -1,5 +1,5 @@
 import React from "react";
-import { auth} from "@/lib/auth";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
@@ -14,4 +14,3 @@ const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
 };
 
 export default AuthLayout;
-

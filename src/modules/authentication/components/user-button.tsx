@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { User, LogOut, Settings, CreditCard, User as UserIcon } from "lucide-react";
+import {
+  User,
+  LogOut,
+  Settings,
+  CreditCard,
+  User as UserIcon,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -56,27 +62,25 @@ export default function UserButton({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-   const onSignOut = async()=>{
+  const onSignOut = async () => {
     await authClient.signOut({
-      fetchOptions:{
-        onSuccess:()=>{
-          router.push("/sign-in")
-        }
-      }
-    })
-  }
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/sign-in");
+        },
+      },
+    });
+  };
 
   const handleLogout = async () => {
-  
-      setIsLoading(true);
-      try {
-        await onSignOut();
-      } catch (error) {
-        console.error("Logout error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    
+    setIsLoading(true);
+    try {
+      await onSignOut();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Get user initials for avatar fallback
@@ -142,7 +146,7 @@ export default function UserButton({
           )}
         </Button>
       </DropdownMenuTrigger>
-      
+
       <DropdownMenuContent className="w-64" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-2">
@@ -179,32 +183,32 @@ export default function UserButton({
             )}
           </div>
         </DropdownMenuLabel>
-        
+
         <DropdownMenuSeparator />
-        
+
         {onProfile && (
           <DropdownMenuItem onClick={onProfile} className="cursor-pointer">
             <UserIcon className="mr-2 h-4 w-4" />
             Profile
           </DropdownMenuItem>
         )}
-        
+
         {onBilling && (
           <DropdownMenuItem onClick={onBilling} className="cursor-pointer">
             <CreditCard className="mr-2 h-4 w-4" />
             Billing
           </DropdownMenuItem>
         )}
-        
+
         {onSettings && (
           <DropdownMenuItem onClick={onSettings} className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" />
             Settings
           </DropdownMenuItem>
         )}
-        
+
         <DropdownMenuSeparator />
-        
+
         <DropdownMenuItem
           onClick={handleLogout}
           disabled={isLoading}

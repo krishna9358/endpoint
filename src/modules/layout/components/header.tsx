@@ -23,7 +23,7 @@ const Header = ({ user }: Props) => {
       <div className='col-span-2 flex items-center justify-between space-x-2   ml-4'>
         <div className='flex items-center hover:cursor-pointer hover:opacity-80'>
           <Unplug size={28} className='text-indigo-400 mr-2' />
-          <h1 className='font-bold'>GET.METHOD</h1>
+          <h1 className='font-bold'>Endpoint</h1>
         </div>
       </div>
 

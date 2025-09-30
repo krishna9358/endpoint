@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Get.Method",
-  description: "Get.Method - The API Development Tool",
+  title: "Endpoint",
+  description: "Endpoint - The API Development Tool",
 };
 
 export default function RootLayout({

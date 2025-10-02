@@ -1,0 +1,6 @@
+--> fix the codebase 
+ [ ] single point of store
+ [ ] single point of types
+ [ ] single point of ui/components
+ [ ] single point of actions(api calling)
+ [ ] single point of hooks

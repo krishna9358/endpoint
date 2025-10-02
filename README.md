@@ -1,4 +1,4 @@
-# getme
+# Endpoint
 
 Modern Next.js app with Postgres (Docker) + Prisma, Tailwind CSS v4, ESLint/Prettier, and Better Auth.
 

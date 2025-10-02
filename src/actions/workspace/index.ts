@@ -3,7 +3,7 @@
 //
 "use server";
 import db from "@/lib/db";
-import { currentUser } from "@/modules/authentication/actions";
+import { currentUser } from "@/actions/authentication";
 import { MEMBER_ROLE, Workspace } from "@prisma/client";
 
 //  Initializing the workspaces

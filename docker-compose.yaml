@@ -1,4 +1,4 @@
-name: postboy
+name: endpoint
 services:
   db:
     image: postgres:latest

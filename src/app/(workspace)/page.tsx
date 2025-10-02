@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import UserButton from "@/modules/authentication/components/user-button";
-import { currentUser } from "@/modules/authentication/actions";
+import UserButton from "@/components/authentication/user-button";
+import { currentUser } from "@/actions/authentication";
 
 export default async function Home() {
   const user = await currentUser();

@@ -2,13 +2,13 @@
 import { Unplug, Search } from "lucide-react";
 import React from "react";
 import SearchBar from "./searchbar";
-import UserButton from "@/modules/authentication/components/user-button";
+import UserButton from "@/components/authentication/user-button";
 
 // import InviteMember from './invite-member'
 // import WorkSpace from './workspace'
 import { UserProps } from "../types";
 import InviteMember from "./invite-members";
-import Workspace from "./workspace";
+import Workspace from "../../../components/workspace/workspace";
 
 interface Props {
   user: UserProps;

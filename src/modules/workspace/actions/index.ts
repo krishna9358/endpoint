@@ -1,13 +1,13 @@
 // 
 //  Actions for the workspace like create default workspace for user and get workspaces 
 // 
-"use server ";
+"use server";
  import db from "@/lib/db";
  import { currentUser } from "@/modules/authentication/actions";
- import { MEMBER_ROLE } from "@prisma/client";
+ import { MEMBER_ROLE, Workspace } from "@prisma/client";
 
 //  Initializing the workspaces 
- export const initializeWorkspace = async () => {
+export const initializeWorkspace = async () => {
     const user = await currentUser();
     if (!user) {
         return{
@@ -54,15 +54,12 @@
 
 
  // Getting all the workspaces
- export const getWorkspaces = async () => {
+ export const getWorkspaces = async () : Promise<Workspace[]> => {
      const user = await currentUser();
      if (!user){
-        return {
-            success : false,
-            error : "unauthorized, user not found"
-        }
+        throw new Error("unauthorized, user not found")
      }
-     const workspaces = db.workspace.findMany({
+     const workspaces = await db.workspace.findMany({
         where:{
             OR:[
                 {ownerId:user.id},

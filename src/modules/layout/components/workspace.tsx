@@ -14,11 +14,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useWorkspaces } from "@/modules/workspace/hooks/workspace";
 
 
 const WorkSpace = () => {
 
+  const {data : workspaces, isLoading , error} = useWorkspaces();
 
+  if(isLoading){
+    return (
+      <Loader className="animate-spin size-4 text-indigo-400"/>
+    )
+  }
+  if(!workspaces || workspaces.length===0){
+    return (
+      <div className="text-indigo-400 font-semibold">No workspaces found</div>
+    )
+  }
+  
   return (
     <>
       <Hint label="Change Workspace">

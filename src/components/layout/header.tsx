@@ -1,14 +1,18 @@
 "use client";
 import { Unplug, Search } from "lucide-react";
 import React from "react";
-import SearchBar from "./searchbar";
+
 import UserButton from "@/components/authentication/user-button";
+import { UserProps } from "@/types/layout";
+import SearchBar from "./searchbar";
+import InviteMember from "./invite-members";
+import WorkSpace from "../workspace/workspace";
 
 // import InviteMember from './invite-member'
 // import WorkSpace from './workspace'
-import { UserProps } from "../types";
-import InviteMember from "./invite-members";
-import Workspace from "../../../components/workspace/workspace";
+
+
+
 
 interface Props {
   user: UserProps;
@@ -40,7 +44,7 @@ const Header = ({ user }: Props) => {
             props={{ className: "hover:opacity-80 hover:cursor-pointer" }}
           />
 
-          <Workspace />
+          <WorkSpace/>
           <UserButton user={user} size="sm" />
         </div>
       </div>

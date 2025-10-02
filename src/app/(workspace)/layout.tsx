@@ -1,5 +1,5 @@
 import { currentUser } from "@/actions/authentication";
-import Header from "@/modules/layout/components/header";
+import Header from "@/components/layout/header";
 import { initializeWorkspace } from "@/actions/workspace";
 import React from "react";
 

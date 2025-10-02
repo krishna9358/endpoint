@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,22 +6,28 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Button } from '@/components/ui/button'
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface ModalProps {
-  children: React.ReactNode
-  title: string
-  description?: string
-  isOpen: boolean
-  onClose: () => void
-  onSubmit?: () => void
-  submitText?: string
-  cancelText?: string
-  showFooter?: boolean
-  submitVariant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link"
-  size?: string
-  className?: string
+  children: React.ReactNode;
+  title: string;
+  description?: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit?: () => void;
+  submitText?: string;
+  cancelText?: string;
+  showFooter?: boolean;
+  submitVariant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
+  size?: string;
+  className?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -31,46 +37,37 @@ const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   onSubmit,
-  submitText = 'Submit',
-  cancelText = 'Cancel',
+  submitText = "Submit",
+  cancelText = "Cancel",
   showFooter = true,
   submitVariant = "default",
   size,
-  className = ''
+  className = "",
 }) => {
   const handleSubmit = () => {
     if (onSubmit) {
-      onSubmit()
+      onSubmit();
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={`${size} ${className}`}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          {description && (
-            <DialogDescription>
-              {description}
-            </DialogDescription>
-          )}
+          {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        
-        <div className="py-4">
-          {children}
-        </div>
+
+        <div className="py-4">{children}</div>
 
         {showFooter && (
           <DialogFooter>
-            <Button
-              variant="outline"
-              onClick={onClose}
-            >
+            <Button variant="outline" onClick={onClose}>
               {cancelText}
             </Button>
             {onSubmit && (
               <Button
-                className='bg-indigo-400 hover:bg-indigo-500 text-white'
+                className="bg-indigo-400 hover:bg-indigo-500 text-white"
                 onClick={handleSubmit}
               >
                 {submitText}
@@ -80,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({
         )}
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

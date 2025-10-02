@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createWorkspaces, getWorkspaceById, getWorkspaces } from "../../../actions/workspace";
+import {
+  createWorkspaces,
+  getWorkspaceById,
+  getWorkspaces,
+} from "@/actions/workspace";
 import { Workspace } from "@prisma/client";
 
 // hook for getting workspace

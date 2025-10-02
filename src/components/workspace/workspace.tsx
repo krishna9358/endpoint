@@ -12,9 +12,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { useWorkspaces } from "@/modules/workspace/hooks/workspace";
+
 import { useWorkspaceStore } from "@/store/useWorkspaceStore";
 import { useEffect, useState } from "react";
+import { useWorkspaces } from "@/hooks/workspace/workspace";
 
 const WorkSpace = () => {
   const { data: workspaces, isLoading, error } = useWorkspaces();
@@ -61,7 +62,12 @@ const WorkSpace = () => {
             ))}
             <Separator className="my-1" />
             <SelectItem value="new">
-              <Button variant="ghost" onClick={()=>{setModalOpen(true)}}>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setModalOpen(true);
+                }}
+              >
                 <Plus className="size-4" />
                 <span className="text-sm text-indigo-400 font-semibold">
                   New workspace

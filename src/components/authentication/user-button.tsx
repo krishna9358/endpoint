@@ -120,7 +120,7 @@ export default function UserButton({
   }
 
   return (
-    <DropdownMenu > 
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"

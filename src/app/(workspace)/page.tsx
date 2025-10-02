@@ -5,9 +5,5 @@ import { currentUser } from "@/modules/authentication/actions";
 
 export default async function Home() {
   const user = await currentUser();
-  return (
-    <>
-      {/* <UserButton user={user} /> */}
-    </>
-  );
+  return <>{/* <UserButton user={user} /> */}</>;
 }

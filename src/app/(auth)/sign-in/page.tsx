@@ -12,7 +12,6 @@ import { Chrome, Github, Unplug } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-
 const LoginPage = () => {
   return (
     <section
@@ -24,14 +23,14 @@ const LoginPage = () => {
         <div className="p-8 pb-6">
           <div>
             <div className="flex items-center justify-center">
-              <Unplug size={28} className='text-indigo-400 mr-2' />
+              <Unplug size={28} className="text-indigo-400 mr-2" />
             </div>
-          <div className=" items-center text-center mb-1 mt-2 gap-4">
-            <h1 className="text-xl font-semibold">
-              Sign in to Endpoint
-            </h1>
-          </div>
-            <p className="text-sm text-center">Welcome back! Sign in to continue</p>
+            <div className=" items-center text-center mb-1 mt-2 gap-4">
+              <h1 className="text-xl font-semibold">Sign in to Endpoint</h1>
+            </div>
+            <p className="text-sm text-center">
+              Welcome back! Sign in to continue
+            </p>
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-3">

@@ -14,18 +14,15 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Hint } from "@/components/ui/hint";
 
-
-const InviteMember = ({props}: {props: any}) => {
-
+const InviteMember = ({ props }: { props: any }) => {
   return (
-            <Hint label="Invite members">
-          <Button className={`border border-emerald-400 bg-emerald-400/10 hover:bg-emerald-400/20 text-emerald-400 hover:text-emerald-300 ${props.className}`}>
-            <UserPlus className="size-4 text-emerald-400" />
-          </Button>
-        </Hint>
-
-
-
+    <Hint label="Invite members">
+      <Button
+        className={`border border-emerald-400 bg-emerald-400/10 hover:bg-emerald-400/20 text-emerald-400 hover:text-emerald-300 ${props.className}`}
+      >
+        <UserPlus className="size-4 text-emerald-400" />
+      </Button>
+    </Hint>
   );
 };
 

@@ -23,7 +23,7 @@ const CreateCollection = ({
     if (!name.trim()) return;
     try {
       await mutateAsync();
-      toast.success("Collection created successfully");
+      // toast.success("Collection created successfully");
       setName("");
       setIsModalOpen(false);
     } catch (err) {

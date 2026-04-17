@@ -25,17 +25,18 @@ export const useGetCollections = (workspaceId: string) => {
     return useQuery({
         queryKey: ["collections", workspaceId],
         queryFn: () => getCollections(workspaceId),
+        enabled: !!workspaceId,
     });
 };
 
 // Deleting a collection
 
-export const useDeleteCollection = (collectionId : string) => {
+export const useDeleteCollection = (workspaceId : string) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: () => deleteCollection(collectionId),
+        mutationFn: (collectionId: string) => deleteCollection(collectionId),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["collections", collectionId] });
+            queryClient.invalidateQueries({ queryKey: ["collections", workspaceId] });
             toast.success("Collection deleted successfully");
         },
         onError: (error) => {
@@ -46,12 +47,13 @@ export const useDeleteCollection = (collectionId : string) => {
 
 // Updating a collection
 
-export const useUpdateCollection = (collectionId : string, name : string) => {
+export const useUpdateCollection = (workspaceId: string) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: () => updateCollection(name, collectionId),
+        mutationFn: ({ collectionId, name }: { collectionId: string, name: string }) => 
+            updateCollection(collectionId, name),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["collections", collectionId] });
+            queryClient.invalidateQueries({ queryKey: ["collections", workspaceId] });
             toast.success("Collection updated successfully");
         },
         onError: (error) => {

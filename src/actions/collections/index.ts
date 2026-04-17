@@ -29,6 +29,7 @@ export  const createCollection = async (name: string, workspaceId: string) => {
 // getting all the collections
 
 export const getCollections = async (workspaceId: string) => {
+    if (!workspaceId) return [];
     try {
         const workspace = await db.workspace.findUnique({
             where:{

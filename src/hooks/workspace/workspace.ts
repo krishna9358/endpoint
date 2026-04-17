@@ -28,7 +28,8 @@ export function useCreateWorkspace() {
 // hook for getting workspace by id
 export function useGettingWorkgspaceById(id: string) {
   return useQuery({
-    queryKey: ["workspaces"],
+    queryKey: ["workspaces", id], // Unique key per workspace
     queryFn: async () => getWorkspaceById(id),
+    enabled: !!id, // Only run if id is provided
   });
 }

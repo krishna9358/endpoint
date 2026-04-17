@@ -1,2 +1,2 @@
-- go through backend of collections once again. 
+- go through frontend of collections once again. 
 - understand force dynamic

@@ -1,6 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
+import { request } from "http";
 
 export type Request = {
     name : string,
@@ -34,21 +35,20 @@ export const addRequestToCollection = async (collectionId : string, value: Reque
 }
 
 
-export const saveRequest = async (request : Request) => {
+export const saveRequest = async (id:string, value : Request) => {
     try {
         const response = await db.request.update({
             where: {
-                id: request.id,
+        id: id,
             },
             data: {
-                name : request.name,
-                url : request.url,
-                method : request.method,
-                collectionId : request.collectionId,
-                parameters : request.parameters,
-                headers : request.headers,
-                body : request.body,
-                response : request.response,
+                name : value.name,
+                url : value.url,
+                method : value.method,
+                parameters : value.parameters,
+                headers : value.headers,
+                body : value.body,
+                response : value.response,
             }
         })
 
@@ -103,4 +103,3 @@ export const getRequestById = async (requestId : string) => {
 }
 
 
-export 

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
-import { useWorkspaceStore } from "@/store/useWorkspaceStore";
+import { useWorkspaceStore } from "@/store/workspaces/useWorkspaceStore";
 import { useEffect, useState } from "react";
 import { useWorkspaces } from "@/hooks/workspace/workspace";
 import CreateWorkspace from "./create-workspace";

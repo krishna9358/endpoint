@@ -1,12 +1,18 @@
 import { currentUser } from "@/actions/authentication";
 import Header from "@/components/layout/header";
 import { initializeWorkspace } from "@/actions/workspace";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export const dynamic = "force-dynamic";
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await currentUser();
+
+  if (!user) {
+    return redirect("/sign-in");
+  }
+
   const workspace = await initializeWorkspace();
   console.log(workspace);
   return (

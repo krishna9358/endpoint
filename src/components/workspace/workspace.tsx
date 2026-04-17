@@ -16,11 +16,13 @@ import { Separator } from "@/components/ui/separator";
 import { useWorkspaceStore } from "@/store/useWorkspaceStore";
 import { useEffect, useState } from "react";
 import { useWorkspaces } from "@/hooks/workspace/workspace";
+import CreateWorkspace from "./create-workspace";
 
 const WorkSpace = () => {
   const { data: workspaces, isLoading, error } = useWorkspaces();
   const { selectedWorkspace, setSelectedWorkspace } = useWorkspaceStore();
   const [modalOpen, setModalOpen] = useState(false);
+
   useEffect(() => {
     if (workspaces && workspaces.length > 0 && !selectedWorkspace) {
       setSelectedWorkspace(workspaces[0]);
@@ -30,11 +32,6 @@ const WorkSpace = () => {
   if (isLoading) {
     return <Loader className="animate-spin size-4 text-indigo-400" />;
   }
-  if (!workspaces || workspaces.length === 0) {
-    return (
-      <div className="text-indigo-400 font-semibold">No workspaces found</div>
-    );
-  }
 
   return (
     <>
@@ -42,7 +39,11 @@ const WorkSpace = () => {
         <Select
           value={selectedWorkspace?.id}
           onValueChange={(id) => {
-            const workspace = workspaces.find((w) => w.id === id);
+            if (id === "new") {
+              setModalOpen(true);
+              return;
+            }
+            const workspace = workspaces?.find((w) => w.id === id);
             if (workspace) {
               setSelectedWorkspace(workspace);
             }
@@ -55,28 +56,24 @@ const WorkSpace = () => {
             </span>
           </SelectTrigger>
           <SelectContent>
-            {workspaces.map((w) => (
+            {workspaces?.map((w) => (
               <SelectItem key={w.id} value={w.id}>
                 {w.name}
               </SelectItem>
             ))}
             <Separator className="my-1" />
-            <SelectItem value="new">
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  setModalOpen(true);
-                }}
-              >
+            <SelectItem value="new" className="cursor-pointer">
+              <div className="flex items-center space-x-2">
                 <Plus className="size-4" />
                 <span className="text-sm text-indigo-400 font-semibold">
                   New workspace
                 </span>
-              </Button>
+              </div>
             </SelectItem>
           </SelectContent>
         </Select>
       </Hint>
+      <CreateWorkspace isModalOpen={modalOpen} setIsModalOpen={setModalOpen}/>
     </>
   );
 };

@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose} >
       <DialogContent className={`${size} ${className}`}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>

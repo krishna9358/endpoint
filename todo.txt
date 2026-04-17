@@ -1,1 +1,2 @@
 - go through backend of collections once again. 
+- understand force dynamic

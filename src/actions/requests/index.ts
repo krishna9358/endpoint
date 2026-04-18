@@ -72,7 +72,7 @@ export const deleteRequest = async (requestId : string) => {
     }
 }
 
-
+// Get All requests 
 export const getRequests = async (collectionId : string) => {
     try {
         const requests = await db.request.findMany({

@@ -23,6 +23,8 @@ import {
 import EditCollectionModal from "./edit-collection";
 import DeleteCollectionModal from "./delete-collection";
 import AddRequestCollectionModal from "./add-request-modal";
+import EditRequestModal from "./edit-request-modal";
+import DeleteRequestModal from "./delete-request-modal";
 
 import { REST_METHOD } from "@prisma/client";
 import { useGetRequests } from "@/hooks/requests/request";
@@ -42,6 +44,10 @@ const CollectionFolder = ({ collection }: Props) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isAddRequestOpen, setIsAddRequestOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const [isEditRequestOpen, setIsEditRequestOpen] = useState(false);
+  const [isDeleteRequestOpen, setIsDeleteRequestOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
 
   const {
     data: requestData,
@@ -207,11 +213,17 @@ const CollectionFolder = ({ collection }: Props) => {
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-32">
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => {
+                            setSelectedRequest(request);
+                            setIsEditRequestOpen(true);
+                          }}>
                             <Edit className="text-blue-400 mr-2 w-3 h-3" />
                             Edit
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => {
+                            setSelectedRequest(request);
+                            setIsDeleteRequestOpen(true);
+                          }}>
                             <Trash className="text-red-400 mr-2 w-3 h-3" />
                             Delete
                           </DropdownMenuItem>
@@ -251,6 +263,19 @@ const CollectionFolder = ({ collection }: Props) => {
         setIsModalOpen={setIsAddRequestOpen}
         collectionId={collection.id}
         initialName="Untitled Request"
+      />
+
+      <EditRequestModal
+        isModalOpen={isEditRequestOpen}
+        setIsModalOpen={setIsEditRequestOpen}
+        requestId={selectedRequest?.id}
+        initialData={selectedRequest}
+      />
+
+      <DeleteRequestModal
+        isModalOpen={isDeleteRequestOpen}
+        setIsModalOpen={setIsDeleteRequestOpen}
+        requestId={selectedRequest?.id}
       />
     </>
   );

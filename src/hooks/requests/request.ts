@@ -31,7 +31,6 @@ export function useSaveRequest(){
         mutationFn: ({id, request}: {id : string, request : Request}) => saveRequest(id, request),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["requests"] });
-            toast.success("Request saved successfully");
         },
         onError: (error) => {
             toast.error(error.message);
@@ -47,7 +46,6 @@ export const useDeleteRequest = () => {
         mutationFn: (requestId: string) => deleteRequest(requestId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["requests"] });
-            toast.success("Request deleted successfully");
         },
         onError: (error) => {
             toast.error(error.message);

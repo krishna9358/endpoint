@@ -3,13 +3,12 @@ import { toast } from "sonner";
 import { getRequests, deleteRequest, saveRequest, addRequestToCollection, type Request  } from "@/actions/requests/index";
 
 // Add request to collection
-export function useAddRequestToCollection(){
+export function useAddRequestToCollection(collectionId: string){
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ({collectionId , request}: {collectionId : string, request : Request}) => addRequestToCollection(collectionId, request),
+        mutationFn: (request : Request) => addRequestToCollection(collectionId, request),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["requests"] });
-            toast.success("Request added successfully");
         },
         onError: (error) => {
             toast.error(error.message);

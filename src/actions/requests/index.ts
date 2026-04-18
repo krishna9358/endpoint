@@ -1,12 +1,13 @@
 "use server";
 
 import db from "@/lib/db";
-import { request } from "http";
+
+import { REST_METHOD } from "@prisma/client";
 
 export type Request = {
     name : string,
     url : string,
-    method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
+    method: REST_METHOD,
     parameters?: string,
     headers?: string,
     body?: string,

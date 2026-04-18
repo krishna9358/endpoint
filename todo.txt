@@ -1,5 +1,6 @@
 - go through frontend of collections once again. 
 - understand force dynamic
+- understand promise return thing more better way.
 
 - make containers, add node balancer or use k8s services for node balancer. 
 - Use redis for variable caching

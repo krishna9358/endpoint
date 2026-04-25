@@ -22,7 +22,7 @@ const EditCollectionModal = ({
   const handleSubmit = async () => {
     if (!name.trim()) return;
     try {
-      await mutateAsync({collectionId, name});
+      await mutateAsync({ collectionId, name });
       toast.success("Collection updated successfully");
       setIsModalOpen(false);
     } catch (err) {

@@ -8,13 +8,15 @@ import {
 import { useWorkspaceStore } from "@/store/workspaces/useWorkspaceStore";
 
 import TabbedSidebar from "@/components/collections/sidebar";
-import { useGettingWorkgspaceById} from "@/hooks/workspace/workspace";
+import { useGettingWorkgspaceById } from "@/hooks/workspace/workspace";
 import { Loader } from "lucide-react";
-
+import RequestPlayground from "@/components/requests/requestPlayground";
 
 const Page = () => {
   const { selectedWorkspace } = useWorkspaceStore();
-  const { data: currentWorkspace, isLoading } = useGettingWorkgspaceById( selectedWorkspace?.id!);
+  const { data: currentWorkspace, isLoading } = useGettingWorkgspaceById(
+    selectedWorkspace?.id!,
+  );
 
   if (isLoading) {
     return (
@@ -24,21 +26,26 @@ const Page = () => {
     );
   }
 
-return (
-  <ResizablePanelGroup direction="horizontal">
-    <ResizablePanel defaultSize={65} minSize={40}>
-        {/* <RequestPlayground /> */}
-    </ResizablePanel>
+  return (
+    <ResizablePanelGroup direction="horizontal">
+      <ResizablePanel defaultSize={65} minSize={40}>
+        <RequestPlayground />
+      </ResizablePanel>
 
-    <ResizableHandle withHandle />
+      <ResizableHandle withHandle />
 
-    <ResizablePanel defaultSize={35} maxSize={40} minSize={25} className="flex">
-      <div className="flex-1">
-        <TabbedSidebar currentWorkspace={currentWorkspace} />
-      </div>
-    </ResizablePanel>
-  </ResizablePanelGroup>
-)
+      <ResizablePanel
+        defaultSize={35}
+        maxSize={40}
+        minSize={30}
+        className="flex"
+      >
+        <div className="flex-1">
+          <TabbedSidebar currentWorkspace={currentWorkspace} />
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
+  );
 };
 
 export default Page;

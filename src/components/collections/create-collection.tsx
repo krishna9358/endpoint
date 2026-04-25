@@ -6,13 +6,12 @@ import { useCreateCollection } from "@/hooks/collections/collection";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-
 const CreateCollection = ({
-    workspaceId,
+  workspaceId,
   isModalOpen,
   setIsModalOpen,
 }: {
-    workspaceId: string;
+  workspaceId: string;
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
 }) => {

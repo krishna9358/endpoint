@@ -22,11 +22,13 @@ import {
 
 import EditCollectionModal from "./edit-collection";
 import DeleteCollectionModal from "./delete-collection";
-import AddRequestCollectionModal from "./add-request-modal";
+import AddRequestCollectionModal from "../requests/add-request-modal";
+import EditRequestModal from "../requests/edit-request-modal";
+import DeleteRequestModal from "../requests/delete-request-modal";
 
 import { REST_METHOD } from "@prisma/client";
 import { useGetRequests } from "@/hooks/requests/request";
-
+import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
 
 interface Props {
   collection: {
@@ -43,13 +45,17 @@ const CollectionFolder = ({ collection }: Props) => {
   const [isAddRequestOpen, setIsAddRequestOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const [isEditRequestOpen, setIsEditRequestOpen] = useState(false);
+  const [isDeleteRequestOpen, setIsDeleteRequestOpen] = useState(false);
+  const [selectedRequest, setSelectedRequest] = useState<any>(null);
+
   const {
     data: requestData,
     isPending,
     isError,
   } = useGetRequests(collection.id);
 
-  // const { openRequestTab } = useRequestPlaygroundStore();
+  const { openRequestTab } = useRequestPlaygroundStore();
 
   const requestColorMap: Record<REST_METHOD, string> = {
     [REST_METHOD.GET]: "text-green-500",
@@ -172,7 +178,7 @@ const CollectionFolder = ({ collection }: Props) => {
                 {requestData.map((request: any) => (
                   <div
                     key={request.id}
-                    // onClick={() => openRequestTab(request)}
+                    onClick={() => openRequestTab(request)}
                     className="flex items-center justify-between py-2 px-3 hover:bg-zinc-900/50 rounded-md cursor-pointer group transition-colors"
                   >
                     <div className="flex items-center space-x-3 flex-1">
@@ -180,7 +186,9 @@ const CollectionFolder = ({ collection }: Props) => {
                         {/* @ts-ignore */}
                         <span
                           className={`text-xs font-bold px-2 py-1 rounded ${
-                            requestColorMap[request.method as keyof typeof requestColorMap] ?? ''
+                            requestColorMap[
+                              request.method as keyof typeof requestColorMap
+                            ] ?? ""
                           } bg-zinc-800`}
                         >
                           {request.method}
@@ -207,11 +215,21 @@ const CollectionFolder = ({ collection }: Props) => {
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-32">
-                          <DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedRequest(request);
+                              setIsEditRequestOpen(true);
+                            }}
+                          >
                             <Edit className="text-blue-400 mr-2 w-3 h-3" />
                             Edit
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedRequest(request);
+                              setIsDeleteRequestOpen(true);
+                            }}
+                          >
                             <Trash className="text-red-400 mr-2 w-3 h-3" />
                             Delete
                           </DropdownMenuItem>
@@ -251,6 +269,19 @@ const CollectionFolder = ({ collection }: Props) => {
         setIsModalOpen={setIsAddRequestOpen}
         collectionId={collection.id}
         initialName="Untitled Request"
+      />
+
+      <EditRequestModal
+        isModalOpen={isEditRequestOpen}
+        setIsModalOpen={setIsEditRequestOpen}
+        requestId={selectedRequest?.id}
+        initialData={selectedRequest}
+      />
+
+      <DeleteRequestModal
+        isModalOpen={isDeleteRequestOpen}
+        setIsModalOpen={setIsDeleteRequestOpen}
+        requestId={selectedRequest?.id}
       />
     </>
   );

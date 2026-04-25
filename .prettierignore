@@ -1,3 +1,9 @@
-# Ignore artifacts:
+node_modules
+.next
+public
+dist
 build
 coverage
+*.lock
+bun.lock
+package-lock.json

@@ -5,102 +5,101 @@ import db from "@/lib/db";
 import { REST_METHOD } from "@prisma/client";
 
 export type Request = {
-    name : string,
-    url : string,
-    method: REST_METHOD,
-    parameters?: string,
-    headers?: string,
-    body?: string,
-    response?: string
-}
+  name: string;
+  url: string;
+  method: REST_METHOD;
+  parameters?: string;
+  headers?: string;
+  body?: string;
+  response?: string;
+};
 
-export const addRequestToCollection = async (collectionId : string, value: Request) => {
-    try {
-        const request = await db.request.create({
-            data: {
-                name : value.name,
-                url : value.url,
-                method : value.method,
-                collectionId : collectionId,
-                parameters : value.parameters,
-                headers : value.headers,
-                body : value.body,
-                response : value.response,
-            }
-        })
+export const addRequestToCollection = async (
+  collectionId: string,
+  value: Request,
+) => {
+  try {
+    const request = await db.request.create({
+      data: {
+        name: value.name,
+        url: value.url,
+        method: value.method,
+        collectionId: collectionId,
+        parameters: value.parameters,
+        headers: value.headers,
+        body: value.body,
+        response: value.response,
+      },
+    });
 
-        return request;
-    } catch (error) {
-        console.log(error);
-    }
-}
+    return request;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-
-export const saveRequest = async (id:string, value : Request) => {
-    try {
-        const response = await db.request.update({
-            where: {
+export const saveRequest = async (id: string, value: Request) => {
+  try {
+    const response = await db.request.update({
+      where: {
         id: id,
-            },
-            data: {
-                name : value.name,
-                url : value.url,
-                method : value.method,
-                parameters : value.parameters,
-                headers : value.headers,
-                body : value.body,
-                response : value.response,
-            }
-        })
+      },
+      data: {
+        name: value.name,
+        url: value.url,
+        method: value.method,
+        parameters: value.parameters,
+        headers: value.headers,
+        body: value.body,
+        response: value.response,
+      },
+    });
 
-        return response;
-    } catch (error) {
-        console.log(error);
-    }
-}
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export const deleteRequest = async (requestId : string) => {
-    try {
-        const request = await db.request.delete({
-            where: {
-                id: requestId,
-            },
-        })
+export const deleteRequest = async (requestId: string) => {
+  try {
+    const request = await db.request.delete({
+      where: {
+        id: requestId,
+      },
+    });
 
-        return request;
-    } catch (error) {
-        console.log(error);
-    }
-}
+    return request;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// Get All requests 
-export const getRequests = async (collectionId : string) => {
-    try {
-        const requests = await db.request.findMany({
-            where: {
-                collectionId : collectionId,
-            },
-        })
+// Get All requests
+export const getRequests = async (collectionId: string) => {
+  try {
+    const requests = await db.request.findMany({
+      where: {
+        collectionId: collectionId,
+      },
+    });
 
-        return requests;
-    } catch (error) {
-        console.log(error);
-    }
-}
+    return requests;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+export const getRequestById = async (requestId: string) => {
+  try {
+    const request = await db.request.findUnique({
+      where: {
+        id: requestId,
+      },
+    });
 
-export const getRequestById = async (requestId : string) => {
-    try {
-        const request = await db.request.findUnique({
-            where: {
-                id: requestId,
-            },
-        })
-
-        return request;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
+    return request;
+  } catch (error) {
+    console.log(error);
+  }
+};

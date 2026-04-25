@@ -4,6 +4,8 @@ import { useRequestPlaygroundStore } from '@/store/request/useRequestStore';
 import  { useState } from 'react'
 import WelcomeRequest from './welcome-request';
 import TabBar from './tab-bar';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { toast } from 'sonner';
 
 const RequestPlayground = () => {
     const { tabs, activeTabId , addTab} = useRequestPlaygroundStore();
@@ -19,6 +21,17 @@ const RequestPlayground = () => {
     //         </div>
     //     )
     // }
+
+    useHotkeys("ctrl+g, meta+shift+g", (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        addTab();
+        toast.success("Tab Added successfully")
+        
+    },{
+        preventDefault:true,
+        enableOnFormTags:true
+    }, [])
   return (
    <div className="flex flex-col h-full">
       <TabBar />

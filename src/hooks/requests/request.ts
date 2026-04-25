@@ -32,10 +32,10 @@ export const useGetRequests = (collectionId: string) => {
 };
 
 // Save request
-export function useSaveRequest() {
+export function useSaveRequest(id:string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, request }: { id: string; request: Request }) =>
+    mutationFn: ( request: Request) =>
       saveRequest(id, request),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });

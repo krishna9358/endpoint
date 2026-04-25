@@ -26,7 +26,7 @@ const SaveRequestToCollectionModal = ({
   setIsModalOpen,
   requestData = {
     name: "Untitled",
-    url: "https://echo.hoppscotch.io",
+    url: "https://krishna-mohan.vercel.app",
     method: REST_METHOD.GET,
   },
   initialName = "Untitled",

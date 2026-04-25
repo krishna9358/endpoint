@@ -12,13 +12,13 @@ const RequestPlayground = () => {
     const {mutateAsync, isPending} = useSaveRequest(activeTab?.requestId!);
     const [showSaveModel, setShowSaveModel] = useState<boolean>(false);
 
-    if(!activeTab){
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <WelcomeRequest />
-            </div>
-        )
-    }
+    // if(!activeTab){
+    //     return (
+    //         <div className="w-full h-full flex items-center justify-center">
+    //             <WelcomeRequest />
+    //         </div>
+    //     )
+    // }
   return (
    <div className="flex flex-col h-full">
       <TabBar />

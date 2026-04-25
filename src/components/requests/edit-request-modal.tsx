@@ -19,7 +19,7 @@ const EditRequestModal = ({
   initialData: Request | null;
 }) => {
   const [name, setName] = useState("");
-  const { mutateAsync, isPending } = useSaveRequest();
+  const { mutateAsync, isPending } = useSaveRequest(requestId);
 
   useEffect(() => {
     if (initialData && isModalOpen) {
@@ -31,11 +31,8 @@ const EditRequestModal = ({
     if (!name.trim() || !initialData || !requestId) return;
     try {
       await mutateAsync({
-        id: requestId,
-        request: {
-          ...initialData,
-          name: name.trim(),
-        },
+        ...initialData,
+        name: name.trim(),
       });
       toast.success("Request updated successfully");
       setIsModalOpen(false);

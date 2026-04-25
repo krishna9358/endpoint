@@ -22,9 +22,9 @@ import {
 
 import EditCollectionModal from "./edit-collection";
 import DeleteCollectionModal from "./delete-collection";
-import AddRequestCollectionModal from "./add-request-modal";
-import EditRequestModal from "./edit-request-modal";
-import DeleteRequestModal from "./delete-request-modal";
+import AddRequestCollectionModal from "../requests/add-request-modal";
+import EditRequestModal from "../requests/edit-request-modal";
+import DeleteRequestModal from "../requests/delete-request-modal";
 
 import { REST_METHOD } from "@prisma/client";
 import { useGetRequests } from "@/hooks/requests/request";

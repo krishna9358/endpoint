@@ -10,8 +10,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "prettier": "npx prettier . --write",
-    "prettier:check": "npx prettier . --check"
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

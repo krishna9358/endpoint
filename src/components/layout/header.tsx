@@ -11,9 +11,6 @@ import WorkSpace from "../workspace/workspace";
 // import InviteMember from './invite-member'
 // import WorkSpace from './workspace'
 
-
-
-
 interface Props {
   user: UserProps;
   //   workspace: WorkspaceProps
@@ -44,7 +41,7 @@ const Header = ({ user }: Props) => {
             props={{ className: "hover:opacity-80 hover:cursor-pointer" }}
           />
 
-          <WorkSpace/>
+          <WorkSpace />
           <UserButton user={user} size="sm" />
         </div>
       </div>

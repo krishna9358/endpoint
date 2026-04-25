@@ -56,7 +56,9 @@ const EditRequestModal = ({
       submitVariant="default"
     >
       <div className="space-y-4">
-        <label className="block text-sm font-medium mb-2 text-zinc-200">Request name</label>
+        <label className="block text-sm font-medium mb-2 text-zinc-200">
+          Request name
+        </label>
         <input
           className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           placeholder="Request name..."

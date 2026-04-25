@@ -73,7 +73,7 @@ const WorkSpace = () => {
           </SelectContent>
         </Select>
       </Hint>
-      <CreateWorkspace isModalOpen={modalOpen} setIsModalOpen={setModalOpen}/>
+      <CreateWorkspace isModalOpen={modalOpen} setIsModalOpen={setModalOpen} />
     </>
   );
 };

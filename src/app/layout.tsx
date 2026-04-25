@@ -37,7 +37,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Toaster/>
+            <Toaster />
             {children}
           </ThemeProvider>
         </ReactQueryProvider>

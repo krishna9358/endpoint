@@ -103,7 +103,54 @@ export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
     }));
   },
 
-  markUnsaved: (id: string, value: boolean) => {},
-  openRequestTab: (request: any) => {},
-  updateTabFromSavedRequest: (tabId: string, savedRequest: SavedRequest) => {},
+  markUnsaved: (id: string, value: boolean) => {
+    set((state) => ({
+        tabs: state.tabs.map((t)=> t.id === id ? {...t, unsavedChanges: value} : t)
+    }))
+  },
+  openRequestTab: (request: any) => {
+    set((state)=> {
+        const existingTab = state.tabs.find((t)=> t.requestId === request.id);
+        if(existingTab){
+            return {activeTabId: existingTab.id};
+        }
+        const newTab: RequestTab = {
+            id: nanoid(),
+            title: request.name || "Untitled",
+            method: request.method,
+            url: request.url,
+            body: request.body,
+            headers: request.headers,
+            parameters: request.parameters,
+            unsavedChanges: false,
+            requestId: request.id,
+            collectionId: request.collectionId,
+            workspaceId: request.workspaceId,
+        };
+        return{
+            tabs: [...state.tabs, newTab],
+            activeTabId: newTab.id,
+        }
+    })
+  },
+  updateTabFromSavedRequest: (tabId: string, savedRequest: SavedRequest) => {
+    set((state) => ({
+      tabs: state.tabs.map((t) =>
+        t.id === tabId
+          ? {
+              ...t,
+              id: savedRequest.id,
+              title: savedRequest.name,
+              method: savedRequest.method,
+              url: savedRequest.url,
+              body: savedRequest.body,
+              headers: savedRequest.headers,
+              parameters: savedRequest.parameters || "",
+              unsavedChanges: false,
+            }
+          : t,
+      ),
+      activeTabId: savedRequest.id,
+    }));
+  },
 }));

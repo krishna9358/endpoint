@@ -1,12 +1,20 @@
 "use client";
 
 import Modal from "@/components/ui/modal";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Folder, Plus, Search, X } from "lucide-react";
 import React, { useState, useEffect, act } from "react";
 import { toast } from "sonner";
-import { useAddRequestToCollection, useSaveRequest } from "@/hooks/requests/request";
-
+import {
+  useAddRequestToCollection,
+  useSaveRequest,
+} from "@/hooks/requests/request";
 
 import { Button } from "@/components/ui/button";
 import { useGetCollections } from "@/hooks/collections/collection";
@@ -22,7 +30,7 @@ const SaveRequestToCollectionModal = ({
     method: REST_METHOD.GET,
   },
   initialName = "Untitled",
-  collectionId
+  collectionId,
 }: {
   isModalOpen: boolean;
   setIsModalOpen: (open: boolean) => void;
@@ -32,17 +40,22 @@ const SaveRequestToCollectionModal = ({
     url: string;
   };
   initialName?: string;
-  collectionId?: string
+  collectionId?: string;
 }) => {
   const [requestName, setRequestName] = useState(initialName);
-  const [selectedCollectionId, setSelectedCollectionId] = useState<string>(collectionId || "");
+  const [selectedCollectionId, setSelectedCollectionId] = useState<string>(
+    collectionId || "",
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
-
   const { selectedWorkspace } = useWorkspaceStore();
-  const { data: collections, isLoading, isError } = useGetCollections(selectedWorkspace?.id!);
-  const { mutateAsync, isPending } = useAddRequestToCollection(selectedCollectionId);
-
+  const {
+    data: collections,
+    isLoading,
+    isError,
+  } = useGetCollections(selectedWorkspace?.id!);
+  const { mutateAsync, isPending } =
+    useAddRequestToCollection(selectedCollectionId);
 
   useEffect(() => {
     if (isModalOpen) {
@@ -52,7 +65,6 @@ const SaveRequestToCollectionModal = ({
     }
   }, [isModalOpen, requestData.name, initialName]);
 
-
   useEffect(() => {
     if (!isModalOpen) return;
     if (collectionId) return;
@@ -61,24 +73,22 @@ const SaveRequestToCollectionModal = ({
     }
   }, [isModalOpen, collections, collectionId, selectedCollectionId]);
 
-
-
-
   const requestColorMap: Record<REST_METHOD, string> = {
     [REST_METHOD.GET]: "text-green-500",
     [REST_METHOD.POST]: "text-indigo-500",
     [REST_METHOD.PUT]: "text-yellow-500",
     [REST_METHOD.DELETE]: "text-red-500",
     [REST_METHOD.PATCH]: "text-orange-500",
-
   };
 
+  const filteredCollections =
+    collections?.filter((collection) =>
+      collection.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    ) || [];
 
-  const filteredCollections = collections?.filter(collection =>
-    collection.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
-
-  const selectedCollection = collections?.find(c => c.id === selectedCollectionId);
+  const selectedCollection = collections?.find(
+    (c) => c.id === selectedCollectionId,
+  );
 
   const handleSubmit = async () => {
     if (!requestName.trim()) {
@@ -92,13 +102,15 @@ const SaveRequestToCollectionModal = ({
     }
 
     try {
-        await mutateAsync({
+      await mutateAsync({
         url: requestData.url.trim(),
         method: requestData.method,
         name: requestName.trim(),
       });
 
-      toast.success(`Request saved to "${selectedCollection?.name}" collection`);
+      toast.success(
+        `Request saved to "${selectedCollection?.name}" collection`,
+      );
       setIsModalOpen(false);
     } catch (err) {
       toast.error("Failed to save request to collection");
@@ -117,9 +129,10 @@ const SaveRequestToCollectionModal = ({
       submitVariant="default"
     >
       <div className="space-y-4">
-
         <div>
-          <label className="block text-sm font-medium mb-2 text-zinc-200">Request name</label>
+          <label className="block text-sm font-medium mb-2 text-zinc-200">
+            Request name
+          </label>
           <div className="relative">
             <input
               className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent pr-20"
@@ -129,7 +142,9 @@ const SaveRequestToCollectionModal = ({
               autoFocus
             />
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-              <span className={`text-xs font-bold px-2 py-1 rounded ${requestColorMap[requestData.method]} bg-zinc-700`}>
+              <span
+                className={`text-xs font-bold px-2 py-1 rounded ${requestColorMap[requestData.method]} bg-zinc-700`}
+              >
                 {requestData.method}
               </span>
             </div>
@@ -137,8 +152,9 @@ const SaveRequestToCollectionModal = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2 text-zinc-200">Select location</label>
-
+          <label className="block text-sm font-medium mb-2 text-zinc-200">
+            Select location
+          </label>
 
           <div className="flex items-center space-x-2 text-sm text-zinc-400 mb-3">
             <span>{selectedWorkspace?.name || "workspace"}</span>
@@ -158,12 +174,13 @@ const SaveRequestToCollectionModal = ({
             />
           </div>
 
-
           <div className="space-y-1 max-h-48 overflow-y-auto">
             {isLoading ? (
               <div className="flex items-center justify-center py-8">
                 <div className="w-5 h-5 border-2 border-zinc-600 border-t-indigo-500 rounded-full animate-spin"></div>
-                <span className="ml-2 text-sm text-zinc-400">Loading collections...</span>
+                <span className="ml-2 text-sm text-zinc-400">
+                  Loading collections...
+                </span>
               </div>
             ) : isError ? (
               <div className="text-center py-4 text-red-400 text-sm">
@@ -171,17 +188,20 @@ const SaveRequestToCollectionModal = ({
               </div>
             ) : filteredCollections.length === 0 ? (
               <div className="text-center py-4 text-zinc-500 text-sm">
-                {searchTerm ? "No collections found" : "No collections available"}
+                {searchTerm
+                  ? "No collections found"
+                  : "No collections available"}
               </div>
             ) : (
               filteredCollections.map((collection) => (
                 <div
                   key={collection.id}
                   onClick={() => setSelectedCollectionId(collection.id)}
-                  className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-200 ${selectedCollectionId === collection.id
-                    ? "bg-indigo-600/20 border border-indigo-500/50 shadow-lg shadow-indigo-500/10"
-                    : "hover:bg-zinc-800 border border-transparent"
-                    }`}
+                  className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                    selectedCollectionId === collection.id
+                      ? "bg-indigo-600/20 border border-indigo-500/50 shadow-lg shadow-indigo-500/10"
+                      : "hover:bg-zinc-800 border border-transparent"
+                  }`}
                 >
                   <div className="flex items-center space-x-3">
                     {selectedCollectionId === collection.id ? (
@@ -191,8 +211,13 @@ const SaveRequestToCollectionModal = ({
                     ) : (
                       <Folder className="w-4 h-4 text-zinc-400" />
                     )}
-                    <span className={`text-sm font-medium ${selectedCollectionId === collection.id ? "text-indigo-200" : "text-zinc-200"
-                      }`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        selectedCollectionId === collection.id
+                          ? "text-indigo-200"
+                          : "text-zinc-200"
+                      }`}
+                    >
                       {collection.name}
                     </span>
                   </div>
@@ -214,7 +239,9 @@ const SaveRequestToCollectionModal = ({
             <div className="flex items-center space-x-2 text-sm">
               <span className="text-zinc-400">Saving to:</span>
               <Folder className="w-4 h-4 text-indigo-400" />
-              <span className="text-indigo-400 font-medium">{selectedCollection.name}</span>
+              <span className="text-indigo-400 font-medium">
+                {selectedCollection.name}
+              </span>
             </div>
           </div>
         )}

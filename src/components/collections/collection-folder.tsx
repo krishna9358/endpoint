@@ -29,7 +29,6 @@ import DeleteRequestModal from "../requests/delete-request-modal";
 import { REST_METHOD } from "@prisma/client";
 import { useGetRequests } from "@/hooks/requests/request";
 
-
 interface Props {
   collection: {
     id: string;
@@ -186,7 +185,9 @@ const CollectionFolder = ({ collection }: Props) => {
                         {/* @ts-ignore */}
                         <span
                           className={`text-xs font-bold px-2 py-1 rounded ${
-                            requestColorMap[request.method as keyof typeof requestColorMap] ?? ''
+                            requestColorMap[
+                              request.method as keyof typeof requestColorMap
+                            ] ?? ""
                           } bg-zinc-800`}
                         >
                           {request.method}
@@ -213,17 +214,21 @@ const CollectionFolder = ({ collection }: Props) => {
                           </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-32">
-                          <DropdownMenuItem onClick={() => {
-                            setSelectedRequest(request);
-                            setIsEditRequestOpen(true);
-                          }}>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedRequest(request);
+                              setIsEditRequestOpen(true);
+                            }}
+                          >
                             <Edit className="text-blue-400 mr-2 w-3 h-3" />
                             Edit
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => {
-                            setSelectedRequest(request);
-                            setIsDeleteRequestOpen(true);
-                          }}>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setSelectedRequest(request);
+                              setIsDeleteRequestOpen(true);
+                            }}
+                          >
                             <Trash className="text-red-400 mr-2 w-3 h-3" />
                             Delete
                           </DropdownMenuItem>

@@ -6,6 +6,7 @@ import WelcomeRequest from './welcome-request';
 import TabBar from './tab-bar';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { toast } from 'sonner';
+import RequestEditor from './request-editor';
 
 const RequestPlayground = () => {
     const { tabs, activeTabId , addTab} = useRequestPlaygroundStore();
@@ -36,7 +37,7 @@ const RequestPlayground = () => {
    <div className="flex flex-col h-full">
       <TabBar />
       <div className="flex-1 overflow-auto">
-        {/* <RequestEditor /> */}
+        <RequestEditor />
       </div>
 
     </div>

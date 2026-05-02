@@ -8,7 +8,7 @@ import RequestEditorArea from "./request-editor-area";
 
 export default function RequestEditor() {
   const { tabs, activeTabId, updateTab} = useRequestPlaygroundStore();
-  const activeTab = tabs.find((t) => t.id === activeTabId) || tabs[0];
+  const activeTab = tabs.find((t) => t.id === activeTabId);
 
   if (!activeTab) return null;
 

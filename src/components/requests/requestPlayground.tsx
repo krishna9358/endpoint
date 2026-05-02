@@ -85,13 +85,13 @@ const getCurrentRequestData = ()=>{
 
   if (!activeTab) {
     return (
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full h-full flex items-center justify-center overflow-hidden min-w-0">
         <WelcomeRequest />
       </div>
     )
   }
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full overflow-hidden min-w-0">
       <TabBar />
       <div className="flex-1 overflow-auto">
         <RequestEditor />

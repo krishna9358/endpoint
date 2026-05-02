@@ -16,10 +16,12 @@ export function useAddRequestToCollection(collectionId: string) {
   return useMutation({
     mutationFn: (request: Request) =>
       addRequestToCollection(collectionId, request),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
-      // @ts-ignore
-      updateTabFromSavedRequest(activeTabId!, data)
+      if (data && activeTabId) {
+        // @ts-ignore
+        updateTabFromSavedRequest(activeTabId, data)
+      }
     },
     onError: (error) => {
       toast.error(error.message);
@@ -42,11 +44,12 @@ export function useSaveRequest(id:string) {
   return useMutation({
     mutationFn: ( request: Request) =>
       saveRequest(id, request),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
-      // @ts-ignore
-      updateTabFromSavedRequest(activeTabId!, data)
-
+      if (data && activeTabId) {
+        // @ts-ignore
+        updateTabFromSavedRequest(activeTabId, data)
+      }
     },
     onError: (error) => {
       toast.error(error.message);

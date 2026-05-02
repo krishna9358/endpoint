@@ -2,6 +2,7 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
+import RenameTabModal from "./rename-tab-modal";
 
 
 export default function TabBar() {
@@ -24,13 +25,15 @@ export default function TabBar() {
 
   return (
     <>
-      <div className="flex items-center border-b border-zinc-800 bg-zinc-900">
+      <div className="flex items-center border-b border-zinc-800 bg-zinc-900 min-w-0">
+        <div className="flex items-center flex-nowrap overflow-x-auto min-w-0 flex-1" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+          <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
         {tabs.map((tab) => (
           <div
             key={tab.id}
             onDoubleClick={() => onDoubleClick(tab.id)}
             onClick={() => setActiveTab(tab.id)}
-            className={`group h-10 px-4 flex items-center justify-between min-w-[160px] max-w-[220px] border-r border-zinc-800 cursor-pointer border-t-2 transition-colors ${activeTabId === tab.id
+            className={`group shrink-0 h-10 px-4 flex items-center justify-between min-w-[160px] max-w-[220px] border-r border-zinc-800 cursor-pointer border-t-2 transition-colors ${activeTabId === tab.id
                 ? "bg-zinc-800 text-white border-t-indigo-500"
                 : "bg-transparent text-zinc-400 hover:bg-zinc-800/50 hover:text-white border-t-transparent"
               }`}
@@ -66,13 +69,23 @@ export default function TabBar() {
           </div>
 
         ))}
+        </div>
         <button
           onClick={addTab}
-          className="px-3 py-2 text-zinc-400 hover:text-white"
+          className="shrink-0 px-3 py-2 text-zinc-400 hover:text-white"
         >
           +
         </button>
       </div>
+      {
+        selectedTabId && (
+          <RenameTabModal
+            isModalOpen={renameModalOpen}
+            setIsModalOpen={setRenameModalOpen}
+            tabId={selectedTabId}
+          />
+        )
+      }
 
     </>
   );

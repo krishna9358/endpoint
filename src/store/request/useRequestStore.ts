@@ -43,18 +43,7 @@ type playgroundState = {
 };
 
 export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
-  tabs: [
-    {
-      id: nanoid(),
-      title: "Untitled",
-      method: "GET",
-      url: "https://krishna-mohan.vercel.app",
-      unsavedChanges: true,
-      parameters: "",
-      headers: "",
-      body: "",
-    },
-  ],
+  tabs: [],
   activeTabId: null,
   addTab: () => {
     set((state) => {
@@ -62,7 +51,7 @@ export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
         id: nanoid(),
         title: "Untitled",
         method: "GET",
-        url: "",
+        url: "https://krishna-mohan.vercel.app",
         body: "",
         headers: "",
         parameters: "",

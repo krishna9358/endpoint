@@ -8,3 +8,6 @@
 - add enviornment scoped feature like staging, production, dev etc. 
 
 
+- fix : when i save a parameter in one request , and switch to another, it shows me the same parameter key value as previous tab. 
+
+

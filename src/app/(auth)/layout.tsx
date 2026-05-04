@@ -3,6 +3,10 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 const AuthLayout = async ({ children }: { children: React.ReactNode }) => {
+  if (process.env.NODE_ENV === "development") {
+    return redirect("/");
+  }
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });

@@ -16,7 +16,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const workspace = await initializeWorkspace();
   console.log(workspace);
   return (
-    <>
+    <> 
       {/* Header */}
       {/* @ts-ignore */}
       <Header user={user} />

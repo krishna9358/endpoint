@@ -2,9 +2,9 @@ import React from "react";
 import { RequestTab } from "@/store/request/useRequestStore";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-// import KeyValueFormEditor from "./key-value-form";
-// import BodyEditor from "./body-editor";
+
 import { toast } from "sonner";
+import KeyValueFormEditor from "../response/key-value-form";
 
 interface Props {
   tab: RequestTab;
@@ -83,7 +83,7 @@ const RequestEditorArea = ({ tab, updateTab }: Props) => {
       </TabsList>
       
       <TabsContent value="parameters" >
-        {/* <KeyValueFormEditor
+        <KeyValueFormEditor
           initialData={getParametersData()}
           onSubmit={handleParametersChange}
           placeholder={{
@@ -91,11 +91,11 @@ const RequestEditorArea = ({ tab, updateTab }: Props) => {
             value: "Parameter Value",
             description: "URL Parameter",
           }}
-        /> */}
+        />
       </TabsContent>
       
       <TabsContent value="headers">
-        {/* <KeyValueFormEditor
+        <KeyValueFormEditor
           initialData={getHeadersData()}
           onSubmit={handleHeadersChange}
           placeholder={{
@@ -103,7 +103,7 @@ const RequestEditorArea = ({ tab, updateTab }: Props) => {
             value: "Header Value",
             description: "HTTP Header",
           }}
-        /> */}
+        />
       </TabsContent>
       
       <TabsContent value="body">

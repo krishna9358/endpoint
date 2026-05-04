@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
+import { Button } from "../ui/button";
 
 const AddNameModal = ({
   isModalOpen,
@@ -20,7 +21,7 @@ const AddNameModal = ({
 
   const [name, setName] = useState(tab?.title || "");
 
- 
+
   useEffect(() => {
     if (tab) setName(tab.title);
   }, [tabId]);
@@ -29,7 +30,7 @@ const AddNameModal = ({
     if (!name.trim()) return;
     try {
       updateTab(tabId, { title: name });
-      markUnsaved(tabId, true); 
+      markUnsaved(tabId, true);
       toast.success("Request name updated");
       setIsModalOpen(false);
     } catch (err) {

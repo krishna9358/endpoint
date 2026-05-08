@@ -7,15 +7,21 @@ import {
   addRequestToCollection,
   type Request,
 } from "@/actions/requests/index";
+import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
 
 // Add request to collection
 export function useAddRequestToCollection(collectionId: string) {
   const queryClient = useQueryClient();
+  const {updateTabFromSavedRequest, activeTabId} = useRequestPlaygroundStore();
   return useMutation({
     mutationFn: (request: Request) =>
       addRequestToCollection(collectionId, request),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
+      if (data && activeTabId) {
+        // @ts-ignore
+        updateTabFromSavedRequest(activeTabId, data)
+      }
     },
     onError: (error) => {
       toast.error(error.message);
@@ -34,11 +40,16 @@ export const useGetRequests = (collectionId: string) => {
 // Save request
 export function useSaveRequest(id:string) {
   const queryClient = useQueryClient();
+  const {updateTabFromSavedRequest, activeTabId} = useRequestPlaygroundStore();
   return useMutation({
     mutationFn: ( request: Request) =>
       saveRequest(id, request),
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
+      if (data && activeTabId) {
+        // @ts-ignore
+        updateTabFromSavedRequest(activeTabId, data)
+      }
     },
     onError: (error) => {
       toast.error(error.message);

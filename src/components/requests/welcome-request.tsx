@@ -12,7 +12,7 @@ const WelcomeRequest = () => {
 
         <div className="bg-zinc-900 p-4 rounded-lg space-y-2">
           <div className="flex justify-between items-center gap-8">
-            <kbd className="px-2 py-1 bg-zinc-800 text-indigo-400 text-sm rounded border">Ctrl+Shift+N</kbd>
+            <kbd className="px-2 py-1 bg-zinc-800 text-indigo-400 text-sm rounded border">CMD+Shift+G</kbd>
             <span className="text-zinc-400 font-semibold">New Request</span>
           </div>
           <div className="flex justify-between items-center gap-8">

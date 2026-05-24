@@ -11,3 +11,4 @@
 - fix : when i save a parameter in one request , and switch to another, it shows me the same parameter key value as previous tab. 
 
 
+- feat: make a request call without saving the request

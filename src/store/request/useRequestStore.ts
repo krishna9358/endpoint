@@ -1,10 +1,9 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 
-
 type HeaderMap = Record<string, string>;
 
-interface RequestRun{
+interface RequestRun {
   id: string;
   requestId: string;
   status: number;
@@ -13,11 +12,9 @@ interface RequestRun{
   body?: string | object | null;
   durationMs: number;
   createdAt: string;
-
 }
 
-
-interface Result{
+interface Result {
   status?: number;
   statusText?: string;
   duration?: number;
@@ -27,7 +24,7 @@ interface Result{
 export interface ResponseData {
   success: boolean;
   requestRun: RequestRun;
-  result? : Result;
+  result?: Result;
 }
 
 export type RequestTab = {
@@ -130,34 +127,36 @@ export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
 
   markUnsaved: (id: string, value: boolean) => {
     set((state) => ({
-        tabs: state.tabs.map((t)=> t.id === id ? {...t, unsavedChanges: value} : t)
-    }))
+      tabs: state.tabs.map((t) =>
+        t.id === id ? { ...t, unsavedChanges: value } : t,
+      ),
+    }));
   },
   openRequestTab: (request: any) => {
-    set((state)=> {
-        const existingTab = state.tabs.find((t)=> t.requestId === request.id);
-        if(existingTab){
-            return {activeTabId: existingTab.id};
-        }
-        const newTab: RequestTab = {
-            id: nanoid(),
-            title: request.name || "Untitled",
-            method: request.method,
-            url: request.url,
-            body: request.body,
-            headers: request.headers,
-            parameters: request.parameters,
-            unsavedChanges: false,
-            requestId: request.id,
-            collectionId: request.collectionId,
-            workspaceId: request.workspaceId,
-            // setResponseViewerData: () => {},
-        };
-        return{
-            tabs: [...state.tabs, newTab],
-            activeTabId: newTab.id,
-        }
-    })
+    set((state) => {
+      const existingTab = state.tabs.find((t) => t.requestId === request.id);
+      if (existingTab) {
+        return { activeTabId: existingTab.id };
+      }
+      const newTab: RequestTab = {
+        id: nanoid(),
+        title: request.name || "Untitled",
+        method: request.method,
+        url: request.url,
+        body: request.body,
+        headers: request.headers,
+        parameters: request.parameters,
+        unsavedChanges: false,
+        requestId: request.id,
+        collectionId: request.collectionId,
+        workspaceId: request.workspaceId,
+        // setResponseViewerData: () => {},
+      };
+      return {
+        tabs: [...state.tabs, newTab],
+        activeTabId: newTab.id,
+      };
+    });
   },
   updateTabFromSavedRequest: (tabId: string, savedRequest: SavedRequest) => {
     set((state) => ({

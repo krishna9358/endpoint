@@ -21,7 +21,6 @@ const AddNameModal = ({
 
   const [name, setName] = useState(tab?.title || "");
 
-
   useEffect(() => {
     if (tab) setName(tab.title);
   }, [tabId]);
@@ -57,7 +56,6 @@ const AddNameModal = ({
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-
         </div>
       </div>
     </Modal>

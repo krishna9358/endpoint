@@ -7,37 +7,38 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 const TabbedLeftPanel = () => {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    const sidebarItems = [
-        { icon: LinkIcon, label: "rest", link: "/" },
-        { icon: Globe, label: "realtime", link: "/ws" },
-    ];
+  const sidebarItems = [
+    { icon: LinkIcon, label: "rest", link: "/" },
+    { icon: Globe, label: "realtime", link: "/ws" },
+  ];
 
-    const isActive = (link: string) =>
-        link === "/" ? pathname === "/" : pathname.startsWith(link);
+  const isActive = (link: string) =>
+    link === "/" ? pathname === "/" : pathname.startsWith(link);
 
-    return (
-        <div className="flex h-screen bg-zinc-950">
-            {/* Sidebar */}
-            <div className="w-12 bg-zinc-900 border-r border-zinc-800 flex flex-col items-center py-4 space-y-4">
-                {sidebarItems.map((item, index) => (
-                    <Hint label={item.label} key={index} side="right">
-                        <Link
-                            href={item.link}
-                            key={index}
-                            className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${isActive(item.link)
-                                    ? "bg-indigo-600 text-white"
-                                    : "text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800"
-                                }`}
-                        >
-                            <item.icon className="w-4 h-4" />
-                        </Link>
-                    </Hint>
-                ))}
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex h-screen bg-zinc-950">
+      {/* Sidebar */}
+      <div className="w-12 bg-zinc-900 border-r border-zinc-800 flex flex-col items-center py-4 space-y-4">
+        {sidebarItems.map((item, index) => (
+          <Hint label={item.label} key={index} side="right">
+            <Link
+              href={item.link}
+              key={index}
+              className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${
+                isActive(item.link)
+                  ? "bg-indigo-600 text-white"
+                  : "text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800"
+              }`}
+            >
+              <item.icon className="w-4 h-4" />
+            </Link>
+          </Hint>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default TabbedLeftPanel;

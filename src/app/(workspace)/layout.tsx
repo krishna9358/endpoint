@@ -17,7 +17,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const workspace = await initializeWorkspace();
   console.log(workspace);
   return (
-    <> 
+    <>
       {/* Header */}
       {/* @ts-ignore */}
       <Header user={user} />
@@ -27,7 +27,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           <div className="w-12 border-zinc-800 bg-zinc-900">
             <TabbedLeftPanel />
           </div>
-          <div className="flex-1 bg-zinc-900 overflow-hidden min-w-0">{children}</div>
+          <div className="flex-1 bg-zinc-900 overflow-hidden min-w-0">
+            {children}
+          </div>
         </div>
       </main>
     </>

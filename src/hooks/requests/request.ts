@@ -14,7 +14,8 @@ import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
 // Add request to collection
 export function useAddRequestToCollection(collectionId: string) {
   const queryClient = useQueryClient();
-  const {updateTabFromSavedRequest, activeTabId} = useRequestPlaygroundStore();
+  const { updateTabFromSavedRequest, activeTabId } =
+    useRequestPlaygroundStore();
   return useMutation({
     mutationFn: (request: Request) =>
       addRequestToCollection(collectionId, request),
@@ -22,7 +23,7 @@ export function useAddRequestToCollection(collectionId: string) {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
       if (data && activeTabId) {
         // @ts-ignore
-        updateTabFromSavedRequest(activeTabId, data)
+        updateTabFromSavedRequest(activeTabId, data);
       }
     },
     onError: (error) => {
@@ -40,17 +41,17 @@ export const useGetRequests = (collectionId: string) => {
 };
 
 // Save request
-export function useSaveRequest(id:string) {
+export function useSaveRequest(id: string) {
   const queryClient = useQueryClient();
-  const {updateTabFromSavedRequest, activeTabId} = useRequestPlaygroundStore();
+  const { updateTabFromSavedRequest, activeTabId } =
+    useRequestPlaygroundStore();
   return useMutation({
-    mutationFn: ( request: Request) =>
-      saveRequest(id, request),
+    mutationFn: (request: Request) => saveRequest(id, request),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
       if (data && activeTabId) {
         // @ts-ignore
-        updateTabFromSavedRequest(activeTabId, data)
+        updateTabFromSavedRequest(activeTabId, data);
       }
     },
     onError: (error) => {
@@ -73,21 +74,20 @@ export const useDeleteRequest = () => {
   });
 };
 
-
 // send request hook
 export function useRunRequest(requestId: string) {
   const queryClient = useQueryClient();
-  const {setResponseViewerData} = useRequestPlaygroundStore();
+  const { setResponseViewerData } = useRequestPlaygroundStore();
   return useMutation({
     mutationFn: async () => await run(requestId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
       //@ts-ignore
       setResponseViewerData(data);
-      toast.success('Request sent successfully!');
+      toast.success("Request sent successfully!");
     },
     onError: (error) => {
-      toast.error('Failed to send request.');
+      toast.error("Failed to send request.");
     },
   });
 }

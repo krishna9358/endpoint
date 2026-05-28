@@ -24,14 +24,14 @@ const LoginPage = () => {
         <div className="p-8 pb-6">
           <div>
             <div className="flex items-center justify-center">
-            <Image
-              src={"/logo.png"}
-              alt="logo"
-              width={100}
-              height={80}
-              className="object-cover object-center"
-              style={{ marginTop: "-36px" }}
-            />
+              <Image
+                src={"/logo.png"}
+                alt="logo"
+                width={100}
+                height={80}
+                className="object-cover object-center"
+                style={{ marginTop: "-36px" }}
+              />
             </div>
             <div className=" items-center text-center mb-1 mt-2 gap-4">
               <h1 className="text-xl font-semibold">Sign in to Endpoint</h1>

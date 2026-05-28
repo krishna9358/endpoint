@@ -70,5 +70,3 @@ export const useUpdateCollection = (workspaceId: string) => {
     },
   });
 };
-
-

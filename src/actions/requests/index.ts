@@ -105,8 +105,6 @@ export const getRequestById = async (requestId: string) => {
   }
 };
 
-
-
 type SendRequestSuccess = {
   status: number;
   statusText: string;
@@ -267,5 +265,4 @@ export async function run(requestId: string) {
   }
 }
 
-
-// ? TODO: Add a function to run a request without saving it to db. 
+// ? TODO: Add a function to run a request without saving it to db.

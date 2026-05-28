@@ -39,9 +39,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <HotkeysProviders>
-
-            <Toaster />
-            {children}
+              <Toaster />
+              {children}
             </HotkeysProviders>
           </ThemeProvider>
         </ReactQueryProvider>

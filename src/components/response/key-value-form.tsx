@@ -23,7 +23,7 @@ const keyValueSchema = z.object({
       key: z.string().min(1, "Key is required"),
       value: z.string().min(1, "Value is required"),
       enabled: z.boolean().default(true).optional(),
-    })
+    }),
   ),
 });
 
@@ -104,7 +104,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
   const getFilteredItemsFromValues = (items: KeyValueItem[]) =>
     items
       .filter(
-        (item) => item.enabled && (item.key?.trim() || item.value?.trim())
+        (item) => item.enabled && (item.key?.trim() || item.value?.trim()),
       )
       .map(({ key, value }) => ({ key, value }));
 
@@ -126,7 +126,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
         onSubmit(filtered);
       }
     },
-    [onSubmit]
+    [onSubmit],
   );
 
   const debouncedSaveRef = useRef(saveIfChanged);
@@ -136,7 +136,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
   }, [saveIfChanged]);
 
   const debouncedInvokerRef = useRef<((items: KeyValueItem[]) => void) | null>(
-    null
+    null,
   );
   useEffect(() => {
     debouncedInvokerRef.current = debounce((items: KeyValueItem[]) => {
@@ -185,7 +185,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
                   "grid grid-cols-12 gap-3 p-3 rounded-lg border transition-all",
                   form.watch(`items.${index}.enabled`)
                     ? "bg-zinc-900 border-zinc-700"
-                    : "bg-zinc-800/50 border-zinc-800 opacity-60"
+                    : "bg-zinc-800/50 border-zinc-800 opacity-60",
                 )}
               >
                 {/* Key Input */}
@@ -246,7 +246,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
                               "relative inline-flex h-4 w-7 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none",
                               checkboxField.value
                                 ? "bg-green-600"
-                                : "bg-zinc-600"
+                                : "bg-zinc-600",
                             )}
                           >
                             <span
@@ -254,7 +254,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
                                 "pointer-events-none inline-block h-3 w-3 transform rounded-full bg-white shadow-sm ring-0 transition-transform duration-200 ease-in-out",
                                 checkboxField.value
                                   ? "translate-x-3"
-                                  : "translate-x-0"
+                                  : "translate-x-0",
                               )}
                             />
                           </button>
@@ -275,7 +275,7 @@ const KeyValueFormEditor: React.FC<KeyValueFormEditorProps> = ({
                       "h-5 w-5 p-0 transition-colors",
                       fields.length <= 1
                         ? "text-zinc-600 cursor-not-allowed"
-                        : "text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                        : "text-red-400 hover:text-red-300 hover:bg-red-900/20",
                     )}
                   >
                     <Trash2 className="h-3 w-3" />

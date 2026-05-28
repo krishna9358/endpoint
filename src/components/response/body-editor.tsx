@@ -1,133 +1,136 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem
-} from '@/components/ui/form'
-import { RotateCcw, Copy, Check, Code, AlignLeft, FileText, Sparkles } from 'lucide-react' 
-import { cn } from '@/lib/utils'
-import { useWorkspaceStore } from '@/store/workspaces/useWorkspaceStore'
-import { useRequestPlaygroundStore } from '@/store/request/useRequestStore'
+  RotateCcw,
+  Copy,
+  Check,
+  Code,
+  AlignLeft,
+  FileText,
+  Sparkles,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useWorkspaceStore } from "@/store/workspaces/useWorkspaceStore";
+import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
 
-
-
-
-const MonacoEditor = dynamic(
-  () => import('@monaco-editor/react'),
-  { ssr: false }
-)
+const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
+  ssr: false,
+});
 
 const bodyEditorSchema = z.object({
-  contentType: z.enum(['application/json', 'text/plain']),
+  contentType: z.enum(["application/json", "text/plain"]),
   body: z.string().optional(),
-})
+});
 
-type BodyEditorFormData = z.infer<typeof bodyEditorSchema>
+type BodyEditorFormData = z.infer<typeof bodyEditorSchema>;
 
 interface BodyEditorProps {
   initialData?: {
-    contentType?: 'application/json' | 'text/plain'
-    body?: string
-  }
-  onSubmit: (data: BodyEditorFormData) => void
-  className?: string
+    contentType?: "application/json" | "text/plain";
+    body?: string;
+  };
+  onSubmit: (data: BodyEditorFormData) => void;
+  className?: string;
 }
 
 const BodyEditor: React.FC<BodyEditorProps> = ({
-  initialData = { contentType: 'application/json', body: '' },
+  initialData = { contentType: "application/json", body: "" },
   onSubmit,
-  className
+  className,
 }) => {
-  const [copied, setCopied] = useState(false)
-  const [showGenerateDialog, setShowGenerateDialog] = useState(false)
-  const [prompt, setPrompt] = useState('')
-  const {selectedWorkspace} = useWorkspaceStore()
+  const [copied, setCopied] = useState(false);
+  const [showGenerateDialog, setShowGenerateDialog] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const { selectedWorkspace } = useWorkspaceStore();
 
-  const {tabs, activeTabId} = useRequestPlaygroundStore();
+  const { tabs, activeTabId } = useRequestPlaygroundStore();
 
   const form = useForm<BodyEditorFormData>({
     resolver: zodResolver(bodyEditorSchema),
     defaultValues: {
-      contentType: initialData.contentType || 'application/json',
-      body: initialData.body || ''
+      contentType: initialData.contentType || "application/json",
+      body: initialData.body || "",
     },
-  })
+  });
 
-  const contentType = form.watch('contentType')
-  const bodyValue = form.watch('body')
+  const contentType = form.watch("contentType");
+  const bodyValue = form.watch("body");
 
   // Handle editor value changes
   const handleEditorChange = (value?: string) => {
-    form.setValue('body', value || '', { shouldValidate: true })
-  }
+    form.setValue("body", value || "", { shouldValidate: true });
+  };
 
   // Handle copy
   const handleCopy = async () => {
     if (bodyValue) {
       try {
-        await navigator.clipboard.writeText(bodyValue)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        await navigator.clipboard.writeText(bodyValue);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
       } catch (err) {
-        console.error('Failed to copy:', err)
+        console.error("Failed to copy:", err);
       }
     }
-  }
+  };
 
   const handleGenerateClick = () => {
     setShowGenerateDialog(true);
-  }
-
-
+  };
 
   const handleFormat = () => {
-    if (contentType === 'application/json' && bodyValue) {
+    if (contentType === "application/json" && bodyValue) {
       try {
-        const formatted = JSON.stringify(JSON.parse(bodyValue), null, 2)
-        form.setValue('body', formatted)
+        const formatted = JSON.stringify(JSON.parse(bodyValue), null, 2);
+        form.setValue("body", formatted);
       } catch (error) {
-        console.error('Invalid JSON format')
+        console.error("Invalid JSON format");
       }
     }
-  }
+  };
 
   // Reset
   const handleReset = () => {
-    form.setValue('body', '')
-  }
+    form.setValue("body", "");
+  };
 
   const contentTypeOptions = [
     {
-      value: 'application/json',
-      label: 'application/json',
+      value: "application/json",
+      label: "application/json",
       icon: Code,
-      description: 'JSON data format'
+      description: "JSON data format",
     },
     {
-      value: 'text/plain',
-      label: 'text/plain',
+      value: "text/plain",
+      label: "text/plain",
       icon: FileText,
-      description: 'Plain text format'
-    }
-  ]
+      description: "Plain text format",
+    },
+  ];
 
   return (
     <div className={cn("w-full", className)}>
@@ -136,7 +139,9 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
           {/* Header */}
           <div className="bg-zinc-900 border-b border-zinc-900 px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <h3 className="text-sm font-medium text-zinc-200">Raw Request Body</h3>
+              <h3 className="text-sm font-medium text-zinc-200">
+                Raw Request Body
+              </h3>
               <div className="flex items-center gap-2 text-xs text-zinc-400">
                 <span>Content Type</span>
                 <FormField
@@ -174,18 +179,16 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
               </div>
             </div>
             <div className="flex items-center gap-2">
-
-
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleFormat}
-                  className="h-7 px-2 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700"
-                  title="Format JSON"
-                >
-                  <AlignLeft className="h-3 w-3" />
-                </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleFormat}
+                className="h-7 px-2 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700"
+                title="Format JSON"
+              >
+                <AlignLeft className="h-3 w-3" />
+              </Button>
               <Button
                 type="button"
                 variant="ghost"
@@ -194,7 +197,11 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
                 className="h-7 px-2 text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700"
                 title="Copy content"
               >
-                {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
+                {copied ? (
+                  <Check className="h-3 w-3 text-green-400" />
+                ) : (
+                  <Copy className="h-3 w-3" />
+                )}
               </Button>
               <Button
                 type="button"
@@ -220,21 +227,25 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
                     <MonacoEditor
                       height="320px"
                       value={field.value}
-                      language={contentType === 'application/json' ? 'json' : 'plaintext'}
+                      language={
+                        contentType === "application/json"
+                          ? "json"
+                          : "plaintext"
+                      }
                       theme="vs-dark"
                       options={{
                         automaticLayout: true,
                         minimap: { enabled: false },
                         scrollBeyondLastLine: false,
                         fontSize: 18,
-                        lineNumbers: 'on',
+                        lineNumbers: "on",
                         roundedSelection: false,
                         padding: { top: 16, bottom: 16 },
                         scrollbar: {
-                          vertical: 'visible',
-                          horizontal: 'visible',
+                          vertical: "visible",
+                          horizontal: "visible",
                           useShadows: false,
-                        }
+                        },
                       }}
                       onChange={handleEditorChange}
                     />
@@ -247,8 +258,8 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
           {/* Footer */}
           <div className="bg-zinc-900 border-t border-zinc-700 px-4 py-3 flex items-center justify-between">
             <div className="text-xs text-zinc-400">
-              Lines: {bodyValue?.split('\n').length || 0} | 
-              Characters: {bodyValue?.length || 0}
+              Lines: {bodyValue?.split("\n").length || 0} | Characters:{" "}
+              {bodyValue?.length || 0}
             </div>
             <Button
               type="button"
@@ -270,7 +281,9 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
-              <Label htmlFor="prompt">What kind of JSON body do you need?</Label>
+              <Label htmlFor="prompt">
+                What kind of JSON body do you need?
+              </Label>
               <Input
                 id="prompt"
                 value={prompt}
@@ -289,12 +302,11 @@ const BodyEditor: React.FC<BodyEditorProps> = ({
             >
               Cancel
             </Button>
-
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default BodyEditor
+export default BodyEditor;

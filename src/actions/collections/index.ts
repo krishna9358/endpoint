@@ -90,3 +90,4 @@ export const updateCollection = async (collectionId: string, name: string) => {
     return null;
   }
 };
+

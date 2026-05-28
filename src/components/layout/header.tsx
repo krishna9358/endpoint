@@ -7,6 +7,7 @@ import { UserProps } from "@/types/layout";
 import SearchBar from "./searchbar";
 import InviteMember from "./invite-members";
 import WorkSpace from "../workspace/workspace";
+import Image from "next/image";
 
 // import InviteMember from './invite-member'
 // import WorkSpace from './workspace'
@@ -21,8 +22,18 @@ const Header = ({ user }: Props) => {
     <header className="grid grid-cols-5 grid-rows-1 gap-2 overflow-x-auto overflow-hidden p-2 border">
       <div className="col-span-2 flex items-center justify-between space-x-2   ml-4">
         <div className="flex items-center hover:cursor-pointer hover:opacity-80">
-          <Unplug size={28} className="text-indigo-400 mr-2" />
-          <h1 className="font-bold">Endpoint</h1>
+          {/* <Unplug size={28} className="text-indigo-400 mr-2" />
+          <h1 className="font-bold">Endpoint</h1> */}
+          <div className="overflow-hidden" style={{ height: "35px" }}>
+            <Image
+              src={"/logo.png"}
+              alt="logo"
+              width={100}
+              height={80}
+              className="object-contain"
+              style={{ marginTop: "-36px" }}
+            />
+          </div>
         </div>
       </div>
 

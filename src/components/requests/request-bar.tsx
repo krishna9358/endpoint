@@ -13,8 +13,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Send } from 'lucide-react'
-// import { useRunRequest } from '@/hooks/request'
 import { toast } from 'sonner'
+import { useRunRequest } from '@/hooks/requests/request';
 
 interface Props {
     tab: RequestTab,
@@ -23,7 +23,7 @@ interface Props {
 
 const RequestBar = ({ tab, updateTab }: Props) => {
 
-  // const {mutateAsync , isPending , isError} = useRunRequest(tab?.requestId!);
+  const {mutateAsync , isPending , isError} = useRunRequest(tab?.requestId!);
   const requestColorMap: Record<string, string> = {
     GET: "text-green-500",
     POST: "text-blue-500",
@@ -33,7 +33,7 @@ const RequestBar = ({ tab, updateTab }: Props) => {
 
   const onSendRequest = async () => {
     try {
-      // const res = await mutateAsync();
+      const res = await mutateAsync();
       
       toast.success('Request sent successfully!');
     } catch (error) {
@@ -72,7 +72,7 @@ const RequestBar = ({ tab, updateTab }: Props) => {
       <Button 
       type='submit'
         onClick={onSendRequest}
-        // disabled={isPending || !tab.url}
+        disabled={isPending || !tab.url}
         className="ml-2 text-white  font-bold bg-indigo-500 hover:bg-indigo-600"
       >
         <Send className="mr-2" />

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { signIn } from "@/lib/auth-client";
 import { Chrome, Github, Unplug } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -23,7 +24,14 @@ const LoginPage = () => {
         <div className="p-8 pb-6">
           <div>
             <div className="flex items-center justify-center">
-              <Unplug size={28} className="text-indigo-400 mr-2" />
+            <Image
+              src={"/logo.png"}
+              alt="logo"
+              width={100}
+              height={80}
+              className="object-cover object-center"
+              style={{ marginTop: "-36px" }}
+            />
             </div>
             <div className=" items-center text-center mb-1 mt-2 gap-4">
               <h1 className="text-xl font-semibold">Sign in to Endpoint</h1>

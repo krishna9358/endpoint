@@ -12,7 +12,7 @@ interface RequestRun{
   headers?: HeaderMap;
   body?: string | object | null;
   durationMs: number;
-  createdAt: Date;
+  createdAt: string;
 
 }
 

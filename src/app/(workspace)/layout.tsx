@@ -3,6 +3,7 @@ import Header from "@/components/layout/header";
 import { initializeWorkspace } from "@/actions/workspace";
 import { redirect } from "next/navigation";
 import React from "react";
+import TabbedLeftPanel from "@/components/workspace/tabbed-left-panel";
 
 export const dynamic = "force-dynamic";
 
@@ -23,9 +24,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       {/* Main Content */}
       <main className="max-h-[calc(100vh-4rem)] h-[calc(100vh-4rem)] flex flex-1 overflow-hidden">
         <div className="flex h-full w-full">
-          {/* <div className="w-12 border-zinc-800 bg-zinc-900">
-            table left panel
-          </div> */}
+          <div className="w-12 border-zinc-800 bg-zinc-900">
+            <TabbedLeftPanel />
+          </div>
           <div className="flex-1 bg-zinc-900 overflow-hidden min-w-0">{children}</div>
         </div>
       </main>

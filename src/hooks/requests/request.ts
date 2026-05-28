@@ -82,6 +82,7 @@ export function useRunRequest(requestId: string) {
     mutationFn: async () => await run(requestId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
+      //@ts-ignore
       setResponseViewerData(data);
       toast.success('Request sent successfully!');
     },

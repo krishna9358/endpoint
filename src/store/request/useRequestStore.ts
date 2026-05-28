@@ -42,8 +42,8 @@ export type RequestTab = {
   requestId?: string;
   collectionId?: string;
   workspaceId?: string;
-  responseViewerData?: ResponseData | null;
-  setResponseViewerData: (data: ResponseData) => void;
+  // responseViewerData?: ResponseData | null;
+  // setResponseViewerData: (data: ResponseData) => void;
 };
 
 type SavedRequest = {

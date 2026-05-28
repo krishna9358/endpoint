@@ -12,3 +12,9 @@
 
 
 - feat: make a request call without saving the request
+
+technical difficulty: 
+Parsing, nad serialization of a lot thing like header and body
+
+
+also tech the full workflow and architectural flow of it like how does the data do what, like mostly the request run thing. 

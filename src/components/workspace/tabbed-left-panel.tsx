@@ -8,12 +8,14 @@ import React from "react";
 
 const TabbedLeftPanel = () => {
     const pathname = usePathname();
-    const activeTab = pathname.split("/")[1] || "rest"; // default to "rest" on home
 
     const sidebarItems = [
         { icon: LinkIcon, label: "rest", link: "/" },
         { icon: Globe, label: "realtime", link: "/ws" },
     ];
+
+    const isActive = (link: string) =>
+        link === "/" ? pathname === "/" : pathname.startsWith(link);
 
     return (
         <div className="flex h-screen bg-zinc-950">
@@ -24,7 +26,7 @@ const TabbedLeftPanel = () => {
                         <Link
                             href={item.link}
                             key={index}
-                            className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${activeTab === item.label
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${isActive(item.link)
                                     ? "bg-indigo-600 text-white"
                                     : "text-zinc-400 hover:text-zinc-300 hover:bg-zinc-800"
                                 }`}

@@ -1,6 +1,35 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 
+
+type HeaderMap = Record<string, string>;
+
+interface RequestRun{
+  id: string;
+  requestId: string;
+  status: number;
+  statusText: string;
+  headers?: HeaderMap;
+  body?: string | object | null;
+  durationMs: number;
+  createdAt: Date;
+
+}
+
+
+interface Result{
+  status?: number;
+  statusText?: string;
+  duration?: number;
+  size?: number;
+}
+
+export interface ResponseData {
+  success: boolean;
+  requestRun: RequestRun;
+  result? : Result;
+}
+
 export type RequestTab = {
   id: string;
   title: string;
@@ -13,6 +42,8 @@ export type RequestTab = {
   requestId?: string;
   collectionId?: string;
   workspaceId?: string;
+  responseViewerData?: ResponseData | null;
+  setResponseViewerData: (data: ResponseData) => void;
 };
 
 type SavedRequest = {
@@ -38,11 +69,15 @@ type playgroundState = {
     tabId: string,
     savedRequest: SavedRequest,
   ) => void;
-  // responseViewerData: ResponseData | null;
-  // setResponseViewerData: (data: ResponseData) => void;
+  responseViewerData: ResponseData | null;
+  setResponseViewerData: (data: ResponseData) => void;
 };
 
 export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
+  responseViewerData: null,
+  setResponseViewerData: (data: ResponseData) => {
+    set({ responseViewerData: data });
+  },
   tabs: [],
   activeTabId: null,
   addTab: () => {
@@ -56,6 +91,7 @@ export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
         headers: "",
         parameters: "",
         unsavedChanges: true,
+        // setResponseViewerData: () => {},
       };
       return {
         tabs: [...state.tabs, newTab],
@@ -115,6 +151,7 @@ export const useRequestPlaygroundStore = create<playgroundState>((set) => ({
             requestId: request.id,
             collectionId: request.collectionId,
             workspaceId: request.workspaceId,
+            // setResponseViewerData: () => {},
         };
         return{
             tabs: [...state.tabs, newTab],

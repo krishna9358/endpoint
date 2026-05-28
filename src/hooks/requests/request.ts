@@ -6,6 +6,8 @@ import {
   saveRequest,
   addRequestToCollection,
   type Request,
+  sendRequest,
+  run,
 } from "@/actions/requests/index";
 import { useRequestPlaygroundStore } from "@/store/request/useRequestStore";
 
@@ -70,3 +72,21 @@ export const useDeleteRequest = () => {
     },
   });
 };
+
+
+// send request hook
+export function useRunRequest(requestId: string) {
+  const queryClient = useQueryClient();
+  const {setResponseViewerData} = useRequestPlaygroundStore();
+  return useMutation({
+    mutationFn: async () => await run(requestId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["requests"] });
+      setResponseViewerData(data);
+      toast.success('Request sent successfully!');
+    },
+    onError: (error) => {
+      toast.error('Failed to send request.');
+    },
+  });
+}

@@ -1,0 +1,275 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1780000864426,
+  "projectRoot": "/Users/krishnamohan/Desktop/endpoint",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      },
+      {
+        "name": "C/C++",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "Makefile"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "16.2.4",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "19.2.5",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "19.2.5",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "make test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "docker compose up -d && bunx prisma db push && next dev --turbopack",
+      "db:sync": "bunx prisma db push",
+      "db:migrate": "bunx prisma migrate dev",
+      "db:generate": "bunx prisma generate",
+      "build": "next build --turbopack",
+      "start": "next start",
+      "lint": "eslint",
+      "format": "prettier . --write",
+      "format:check": "prettier . --check"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "src"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "prisma": {
+      "path": "prisma",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1780000864372,
+      "keyFiles": [
+        "schema.prisma"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 8,
+      "lastAccessed": 1780000864375,
+      "keyFiles": [
+        "bg.jpg",
+        "bg2.jpg",
+        "file.svg",
+        "globe.svg",
+        "logo.png"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1780000864401,
+      "keyFiles": []
+    },
+    "prisma/migrations": {
+      "path": "prisma/migrations",
+      "purpose": "Database migrations",
+      "fileCount": 1,
+      "lastAccessed": 1780000864402,
+      "keyFiles": [
+        "migration_lock.toml"
+      ]
+    },
+    "src/app": {
+      "path": "src/app",
+      "purpose": "Application code",
+      "fileCount": 3,
+      "lastAccessed": 1780000864403,
+      "keyFiles": [
+        "favicon.ico",
+        "globals.css",
+        "layout.tsx"
+      ]
+    },
+    "src/components": {
+      "path": "src/components",
+      "purpose": "UI components",
+      "fileCount": 0,
+      "lastAccessed": 1780000864403,
+      "keyFiles": []
+    },
+    "src/lib": {
+      "path": "src/lib",
+      "purpose": "Library code",
+      "fileCount": 5,
+      "lastAccessed": 1780000864404,
+      "keyFiles": [
+        "auth-client.ts",
+        "auth.ts",
+        "db.ts"
+      ]
+    },
+    "src/types": {
+      "path": "src/types",
+      "purpose": "Type definitions",
+      "fileCount": 0,
+      "lastAccessed": 1780000864404,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/lib/db.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000983765,
+      "type": "file"
+    },
+    {
+      "path": "src/actions/requests/index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000984565,
+      "type": "file"
+    },
+    {
+      "path": "src/store/request/useRequestStore.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000985059,
+      "type": "file"
+    },
+    {
+      "path": "src/hooks/requests/request.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000985586,
+      "type": "file"
+    },
+    {
+      "path": "src/actions/collections/index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000990023,
+      "type": "file"
+    },
+    {
+      "path": "src/actions/workspace/index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000990583,
+      "type": "file"
+    },
+    {
+      "path": "src/components/response/response-viewer.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780000991208,
+      "type": "file"
+    },
+    {
+      "path": "src/components/response/body-editor.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780000996689,
+      "type": "file"
+    },
+    {
+      "path": "src/hooks/collections/collection.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000997160,
+      "type": "file"
+    },
+    {
+      "path": "src/store/workspaces/useWorkspaceStore.ts",
+      "accessCount": 1,
+      "lastAccessed": 1780000997784,
+      "type": "file"
+    },
+    {
+      "path": "src/components/requests/requestPlayground.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001001897,
+      "type": "file"
+    },
+    {
+      "path": "src/components/requests/request-editor.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001002438,
+      "type": "file"
+    },
+    {
+      "path": "src/components/requests/request-bar.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001002892,
+      "type": "file"
+    },
+    {
+      "path": "src/app/(workspace)/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001002948,
+      "type": "file"
+    },
+    {
+      "path": "src/components/requests/request-editor-area.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001006898,
+      "type": "file"
+    },
+    {
+      "path": "src/components/collections/sidebar.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780001006937,
+      "type": "file"
+    },
+    {
+      "path": "docs/architecture.md",
+      "accessCount": 1,
+      "lastAccessed": 1780001088995,
+      "type": "file"
+    },
+    {
+      "path": "docs/e2e-flow.md",
+      "accessCount": 1,
+      "lastAccessed": 1780001162643,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

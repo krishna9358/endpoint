@@ -12,3 +12,6 @@
 
 
 - feat: make a request call without saving the request
+
+
+technical dificulty : subscribewithselector  in zustand, it was rerendering issue in websocket,

@@ -160,7 +160,7 @@ export async function sendRequest(req: {
     return {
       status: res.status,
       statusText: res.statusText,
-      headers: res.headers as Record<string, unknown>,
+      headers: Object.fromEntries(Object.entries(res.headers)),
       data: res.data,
       durationMs: duration,
       size,

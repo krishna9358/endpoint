@@ -3,15 +3,11 @@ import {google} from "@ai-sdk/google";
 import {env} from "./env";
 import { z } from "zod";
 import { REST_METHOD } from "@prisma/client";
+import { JsonBodyGenerationParams, RequestSuggestionParams } from "@/types/ai";
 
 const model = google("gemini-2.5-flash");
 
-export interface RequestSuggestionParams {
-    method: REST_METHOD;
-    workspaceName: string;
-    url?: string;
-    description?: string;
-}
+
 
 const RequestNameSchema = z.object({
     suggestion: z.array(z.object({
@@ -95,12 +91,6 @@ export async function batchSuggestRequestNames(
   }
 
 
-export interface JsonBodyGenerationParams{
-    prompt: string;
-    method?: REST_METHOD;
-    endpoint?: string;
-    context?: string;
-}
 
 const JsonBodyGenerationSchema = z.object({
     jsonBody: z.string().describe("Generated JSON body"),

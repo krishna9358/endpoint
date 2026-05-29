@@ -1,8 +1,3 @@
-- go through frontend of collections once again. 
-- understand force dynamic
-- understand promise return thing more better way.
-
-- make containers, add node balancer or use k8s services for node balancer. 
 - Use redis for variable caching
 - add variable feature.
 - add enviornment scoped feature like staging, production, dev etc. 
@@ -12,6 +7,7 @@
 
 
 - feat: make a request call without saving the request
-
+- feat: define role and access while invite the workspace 
 
 technical dificulty : subscribewithselector  in zustand, it was rerendering issue in websocket,
+Parsing, nad serialization of a lot thing like header and body

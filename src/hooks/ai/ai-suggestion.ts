@@ -12,7 +12,9 @@ export function useSuggestRequestName() {
         updatedAt: Date.now(),
       });
 
-      toast.success(`Generated ${data.suggestions.length} name suggestions`);
+      if (data.suggestions?.length) {
+        toast.success(`Generated ${data.suggestions.length} name suggestions`);
+      }
     },
   });
 }

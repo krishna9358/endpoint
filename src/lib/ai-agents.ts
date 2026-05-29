@@ -5,14 +5,14 @@ import { z } from "zod";
 import { REST_METHOD } from "@prisma/client";
 import { JsonBodyGenerationParams, RequestSuggestionParams } from "@/types/ai";
 
-const model = google("gemini-2.5-flash");
+const model = google("gemini-3.1-flash-lite");
 
 
 
 const RequestNameSchema = z.object({
-    suggestion: z.array(z.object({
+    suggestions: z.array(z.object({
         name: z.string().describe("Suggested request name"),
-        resoning: z.string().describe("Reasoning for the suggested name"),
+        reasoning: z.string().describe("Reasoning for the suggested name"),
         confidence: z.number().min(0).max(1).describe("Confidence in the suggestion"),
     })).length(3).describe("3 suggested request names"),
 })

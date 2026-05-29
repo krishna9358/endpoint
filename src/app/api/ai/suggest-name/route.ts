@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { suggestRequestName } from '@/lib/ai-agents';
+import { NextRequest, NextResponse } from "next/server";
+import { suggestRequestName } from "@/lib/ai-agents";
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,8 +8,8 @@ export async function POST(request: NextRequest) {
 
     if (!workspaceName || !method) {
       return NextResponse.json(
-        { error: 'Workspace name and method are required' },
-        { status: 400 }
+        { error: "Workspace name and method are required" },
+        { status: 400 },
       );
     }
 
@@ -17,22 +17,19 @@ export async function POST(request: NextRequest) {
       workspaceName,
       method,
       url,
-      description
+      description,
     });
 
     if (!result.success) {
-      return NextResponse.json(
-        { error: result.error },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: result.error }, { status: 500 });
     }
 
     return NextResponse.json(result.data);
   } catch (error) {
-    console.error('API Error:', error);
+    console.error("API Error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

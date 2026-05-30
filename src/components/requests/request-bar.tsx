@@ -31,11 +31,13 @@ const RequestBar = ({ tab, updateTab }: Props) => {
   };
 
   const onSendRequest = async () => {
+    if (!tab.requestId) {
+      toast.error("Save this request to a collection before sending.");
+      return;
+    }
     try {
-      const res = await mutateAsync();
-
-      toast.success("Request sent successfully!");
-    } catch (error) {
+      await mutateAsync();
+    } catch {
       toast.error("Failed to send request.");
     }
   };
@@ -81,7 +83,7 @@ const RequestBar = ({ tab, updateTab }: Props) => {
       <Button
         type="submit"
         onClick={onSendRequest}
-        disabled={isPending || !tab.url}
+        disabled={isPending || !tab.url || !tab.requestId}
         className="ml-2 text-white  font-bold bg-indigo-500 hover:bg-indigo-600"
       >
         <Send className="mr-2" />

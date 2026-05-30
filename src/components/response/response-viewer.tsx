@@ -203,7 +203,7 @@ const ResponseViewer = ({ responseData }: Props) => {
                       className="ml-2 text-xs bg-zinc-700"
                     >
                       {
-                        Object.keys(responseData.requestRun.headers ?? {})
+                        Object.keys(responseData.requestRun?.headers ?? {})
                           .length
                       }
                     </Badge>
@@ -311,7 +311,7 @@ const ResponseViewer = ({ responseData }: Props) => {
                   <div className="p-6">
                     <div className="space-y-3">
                       {Object.entries(
-                        responseData.requestRun.headers ?? {},
+                        responseData.requestRun?.headers ?? {},
                       ).map(([key, value]) => (
                         <div
                           key={key}
